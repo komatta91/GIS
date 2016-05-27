@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace ConsoleApplication3CSHARP
 
         public void addEdge(int u, int v)
         {
-            adj[u].Add(v); //adj[v].Add(u);
+            adj[u].Add(v);
             this.totalEdgesToVisit++;
         }
 
@@ -44,37 +45,10 @@ namespace ConsoleApplication3CSHARP
                     break;
                 }
             }
-
-            //for (int i = 0; i < adj[v].Count; i++)
-            //{
-            //    if (adj[v][i] == u)
-            //    {
-            //        adj[v][i] = -1;
-            //        break;
-            //    }
-            //}
+            
         }
-
-        public void undoRemoveEdge(int u, int v)
-        {
-            for (int i = 0; i < adj[u].Count; i++)
-            {
-                if (adj[u][i] == -1)
-                {
-                    adj[u][i] = v;
-                    break;
-                }
-            }
-
-            //for (int i = 0; i < adj[v].Count; i++)
-            //{
-            //    if (adj[v][i] == -1)
-            //    {
-            //        adj[v][i] = u;
-            //        break;
-            //    }
-            //}
-        }
+        
+        
 
         public int DFSCount(int v, List<bool> visited)
         {
@@ -114,8 +88,6 @@ namespace ConsoleApplication3CSHARP
             int count1 = DFSCount(u, visited);
             c1 = count1;
 
-            //removeEdge(u, v);
-
             for (int i = 0; i < visited.Count; i++)
             {
                 visited[i] = false;
@@ -123,8 +95,7 @@ namespace ConsoleApplication3CSHARP
 
             int count2 = DFSCount(v, visited);
             c2 = count2;
-
-            //undoRemoveEdge(u, v);
+            
 
             return (count1 > count2) ? false : true;
 
@@ -180,6 +151,41 @@ namespace ConsoleApplication3CSHARP
     {
         static void Main(string[] args)
         {
+            string filePath = "GraphData.txt";
+
+            if(args.Length > 0)
+            {
+                filePath = args[0];
+            }
+
+            List<string> lines = new List<string>();
+            string line;
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lines.Add(line);
+                }
+            }
+
+            Graph g = new Graph(lines.Count);
+
+            foreach(string singleLine in lines)
+            {
+                string[] vertices = singleLine.Split(',');
+
+                int vIndex = Convert.ToInt32(vertices[0]);
+
+                for (int i = 1; i < vertices.Length; i++)
+                {
+                    g.addEdge(vIndex, Convert.ToInt32(vertices[i]));
+                }
+            }
+
+            g.printEulerUtil(0);
+            Console.Write(" --- VISITED: " + g.totalEdgesVisited.ToString() + " OF " + g.totalEdgesToVisit.ToString() + " EDGES --- ");
+            Console.WriteLine("Finished");
+
             //Graph g1 = new Graph(4);
             //g1.addEdge(0, 1);
             //g1.addEdge(0, 2);
@@ -208,83 +214,83 @@ namespace ConsoleApplication3CSHARP
             //g3.printEulerUtil(0);
             //Console.WriteLine("Finished");
 
-            Graph gX = new Graph(8);
-            gX.addEdge(1, 0);
-            gX.addEdge(0, 1);
-            gX.addEdge(1, 2);
-            gX.addEdge(2, 3);
-            gX.addEdge(3, 4);
-            gX.addEdge(4, 1);
-            gX.addEdge(7, 0);
-            gX.addEdge(6, 7);
-            gX.addEdge(5, 6);
-            gX.addEdge(0, 5);
-            gX.printEulerUtil(1);
-            Console.Write(" --- VISITED: " + gX.totalEdgesVisited.ToString() + " OF " + gX.totalEdgesToVisit.ToString() + " EDGES --- ");
-            Console.WriteLine("Finished");
+            //Graph gX = new Graph(8);
+            //gX.addEdge(1, 0);
+            //gX.addEdge(0, 1);
+            //gX.addEdge(1, 2);
+            //gX.addEdge(2, 3);
+            //gX.addEdge(3, 4);
+            //gX.addEdge(4, 1);
+            //gX.addEdge(7, 0);
+            //gX.addEdge(6, 7);
+            //gX.addEdge(5, 6);
+            //gX.addEdge(0, 5);
+            //gX.printEulerUtil(1);
+            //Console.Write(" --- VISITED: " + gX.totalEdgesVisited.ToString() + " OF " + gX.totalEdgesToVisit.ToString() + " EDGES --- ");
+            //Console.WriteLine("Finished");
 
-            Graph gZ = new Graph(8);
-            gZ.addEdge(1, 0);
-            gZ.addEdge(0, 1);
-            gZ.addEdge(1, 2);
-            gZ.addEdge(2, 3);
-            gZ.addEdge(3, 4);
-            gZ.addEdge(4, 1);
-            gZ.addEdge(2, 1);
-            gZ.addEdge(3, 2);
-            gZ.addEdge(4, 3);
-            gZ.addEdge(1, 4);
-            gZ.addEdge(7, 0);
-            gZ.addEdge(6, 7);
-            gZ.addEdge(5, 6);
-            gZ.addEdge(0, 5);
-            gZ.addEdge(0, 7);
-            gZ.addEdge(7, 6);
-            gZ.addEdge(6, 5);
-            gZ.addEdge(5, 0);
-            gZ.printEulerUtil(1);
-            Console.Write(" --- VISITED: " + gZ.totalEdgesVisited.ToString() + " OF " + gZ.totalEdgesToVisit.ToString() + " EDGES --- ");
-            Console.WriteLine("Finished");
+            //Graph gZ = new Graph(8);
+            //gZ.addEdge(1, 0);
+            //gZ.addEdge(0, 1);
+            //gZ.addEdge(1, 2);
+            //gZ.addEdge(2, 3);
+            //gZ.addEdge(3, 4);
+            //gZ.addEdge(4, 1);
+            //gZ.addEdge(2, 1);
+            //gZ.addEdge(3, 2);
+            //gZ.addEdge(4, 3);
+            //gZ.addEdge(1, 4);
+            //gZ.addEdge(7, 0);
+            //gZ.addEdge(6, 7);
+            //gZ.addEdge(5, 6);
+            //gZ.addEdge(0, 5);
+            //gZ.addEdge(0, 7);
+            //gZ.addEdge(7, 6);
+            //gZ.addEdge(6, 5);
+            //gZ.addEdge(5, 0);
+            //gZ.printEulerUtil(1);
+            //Console.Write(" --- VISITED: " + gZ.totalEdgesVisited.ToString() + " OF " + gZ.totalEdgesToVisit.ToString() + " EDGES --- ");
+            //Console.WriteLine("Finished");
 
-            Console.WriteLine();
-            Graph gY = new Graph(19);
-            gY.addEdge(1, 0);
-            gY.addEdge(0, 2);
-            gY.addEdge(2, 1);
-            gY.addEdge(1, 3);
-            gY.addEdge(3, 4);
-            gY.addEdge(4, 5);
-            gY.addEdge(5, 1);
-            gY.addEdge(0, 9);
-            gY.addEdge(9, 10);
-            gY.addEdge(10, 11);
-            gY.addEdge(11, 0);
-            gY.addEdge(2, 7);
-            gY.addEdge(7, 8);
-            gY.addEdge(8, 6);
-            gY.addEdge(6, 2);
-            gY.addEdge(6, 12);
-            gY.addEdge(12, 6);
-            gY.addEdge(13, 12);
-            gY.addEdge(12, 13);
-            gY.addEdge(14, 12);
-            gY.addEdge(12, 14);
-            gY.addEdge(13, 15);
-            gY.addEdge(15, 13);
-            gY.addEdge(14, 15);
-            gY.addEdge(15, 14);
-            gY.addEdge(13, 16);
-            gY.addEdge(16, 17);
-            gY.addEdge(17, 18);
-            gY.addEdge(18, 13);
-            gY.addEdge(14, 15);
-            gY.addEdge(15, 14);
-            gY.addEdge(13, 15);
-            gY.addEdge(15, 13);
+            //Console.WriteLine();
+            //Graph gY = new Graph(19);
+            //gY.addEdge(1, 0);
+            //gY.addEdge(0, 2);
+            //gY.addEdge(2, 1);
+            //gY.addEdge(1, 3);
+            //gY.addEdge(3, 4);
+            //gY.addEdge(4, 5);
+            //gY.addEdge(5, 1);
+            //gY.addEdge(0, 9);
+            //gY.addEdge(9, 10);
+            //gY.addEdge(10, 11);
+            //gY.addEdge(11, 0);
+            //gY.addEdge(2, 7);
+            //gY.addEdge(7, 8);
+            //gY.addEdge(8, 6);
+            //gY.addEdge(6, 2);
+            //gY.addEdge(6, 12);
+            //gY.addEdge(12, 6);
+            //gY.addEdge(13, 12);
+            //gY.addEdge(12, 13);
+            //gY.addEdge(14, 12);
+            //gY.addEdge(12, 14);
+            //gY.addEdge(13, 15);
+            //gY.addEdge(15, 13);
+            //gY.addEdge(14, 15);
+            //gY.addEdge(15, 14);
+            //gY.addEdge(13, 16);
+            //gY.addEdge(16, 17);
+            //gY.addEdge(17, 18);
+            //gY.addEdge(18, 13);
+            //gY.addEdge(14, 15);
+            //gY.addEdge(15, 14);
+            //gY.addEdge(13, 15);
+            //gY.addEdge(15, 13);
 
-            gY.printEulerUtil(15);
-            Console.Write(" --- VISITED: " + gY.totalEdgesVisited.ToString() + " OF " + gY.totalEdgesToVisit.ToString() + " EDGES --- ");
-            Console.WriteLine("Finished");
+            //gY.printEulerUtil(15);
+            //Console.Write(" --- VISITED: " + gY.totalEdgesVisited.ToString() + " OF " + gY.totalEdgesToVisit.ToString() + " EDGES --- ");
+            //Console.WriteLine("Finished");
 
             Console.ReadKey();
         }
