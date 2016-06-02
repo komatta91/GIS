@@ -199,6 +199,8 @@ namespace ConsoleApplication3CSHARP
         /// <param name="args">Optional filename argument</param>
         private static void Main(string[] args)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             string filePath = "GraphData.txt";
 
             if (args.Length > 0)
@@ -234,16 +236,16 @@ namespace ConsoleApplication3CSHARP
 
             g.printEulerUtil(0);
             Console.Write(" --- VISITED: " + g.totalEdgesVisited.ToString() + " OF " + g.totalEdgesToVisit.ToString() + " EDGES --- \n");
-            if (g.totalEdgesVisited == g.totalEdgesToVisit)
-            {
-                Console.WriteLine(" --- Finished Sucess --- \n");
-            }
-            else
-            {
-                Console.WriteLine(" --- Finished Faild --- \n");
-            }
 
-            Console.ReadKey();
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+
+            StreamWriter w = File.AppendText("log.txt");
+            w.WriteLine("Edges: " + g.totalEdgesVisited.ToString() + " Finished in " + elapsedMs + "ms ");
+            w.Close();
+            //Console.WriteLine(" --- Finished in " + elapsedMs + "ms --- \n");
+
+            //Console.ReadKey();
         }
     }
 }
