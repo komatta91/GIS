@@ -1,0 +1,7 @@
+C:\Users\Komatta\Desktop\Studia\16L\GIS\GIS\2_Implementacja\ConsoleApplication3CSHARP\ConsoleApplication3CSHARP\bin\Debug\ConsoleApplication3CSHARP.exe.config
+C:\Users\Komatta\Desktop\Studia\16L\GIS\GIS\2_Implementacja\ConsoleApplication3CSHARP\ConsoleApplication3CSHARP\bin\Debug\GraphData.txt
+C:\Users\Komatta\Desktop\Studia\16L\GIS\GIS\2_Implementacja\ConsoleApplication3CSHARP\ConsoleApplication3CSHARP\bin\Debug\ConsoleApplication3CSHARP.exe
+C:\Users\Komatta\Desktop\Studia\16L\GIS\GIS\2_Implementacja\ConsoleApplication3CSHARP\ConsoleApplication3CSHARP\bin\Debug\ConsoleApplication3CSHARP.pdb
+C:\Users\Komatta\Desktop\Studia\16L\GIS\GIS\2_Implementacja\ConsoleApplication3CSHARP\ConsoleApplication3CSHARP\obj\Debug\ConsoleApplication3CSHARP.csprojResolveAssemblyReference.cache
+C:\Users\Komatta\Desktop\Studia\16L\GIS\GIS\2_Implementacja\ConsoleApplication3CSHARP\ConsoleApplication3CSHARP\obj\Debug\ConsoleApplication3CSHARP.exe
+C:\Users\Komatta\Desktop\Studia\16L\GIS\GIS\2_Implementacja\ConsoleApplication3CSHARP\ConsoleApplication3CSHARP\obj\Debug\ConsoleApplication3CSHARP.pdb
